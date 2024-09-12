@@ -1,106 +1,224 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Restful API Design: Best Practices and Guidelines | Shawn&#39;s Tech Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="RESTful is currently the most popular API design standard used for designing web data interfaces. Its core principles are easy to grasp, but the details can be tricky to get right. This article summar">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"gaoshan070.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="RESTful is currently the most popular API design standard used for designing web data interfaces. Its core principles are easy to grasp, but the details can be tricky to get right. This article summa">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Restful API Design: Best Practices and Guidelines">
 <meta property="og:url" content="http://gaoshan070.github.io/2024/09/12/restful-api-design/index.html">
 <meta property="og:site_name" content="Shawn&#39;s Tech Blog">
-<meta property="og:description" content="RESTful is currently the most popular API design standard used for designing web data interfaces. Its core principles are easy to grasp, but the details can be tricky to get right. This article summar">
+<meta property="og:description" content="RESTful is currently the most popular API design standard used for designing web data interfaces. Its core principles are easy to grasp, but the details can be tricky to get right. This article summa">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-09-12T01:58:39.000Z">
-<meta property="article:modified_time" content="2024-09-12T09:06:14.625Z">
+<meta property="article:modified_time" content="2024-09-12T10:05:50.409Z">
 <meta property="article:author" content="Shawn">
 <meta property="article:tag" content="API">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Shawn's Tech Blog" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-  
-  
-<meta name="generator" content="Hexo 7.3.0"></head>
+<link rel="canonical" href="http://gaoshan070.github.io/2024/09/12/restful-api-design/">
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Shawn&#39;s Tech Blog</a>
-      </h1>
-      
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://gaoshan070.github.io/2024/09/12/restful-api-design/","path":"2024/09/12/restful-api-design/","title":"Restful API Design: Best Practices and Guidelines"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Restful API Design: Best Practices and Guidelines | Shawn's Tech Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Shawn's Tech Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
         
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://gaoshan070.github.io"></form>
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-URL-Design"><span class="nav-number">1.</span> <span class="nav-text">1. URL Design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Verb-Object"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 Verb + Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Overriding-Verbs"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Overriding Verbs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-The-Object-Must-Be-a-Noun"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 The Object Must Be a Noun</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-Plural-URLs"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 Plural URLs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-Avoid-Deeply-Nested-URLs"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 Avoid Deeply Nested URLs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Status-Codes"><span class="nav-number">2.</span> <span class="nav-text">2. Status Codes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Status-Codes-Must-Be-Precise"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Status Codes Must Be Precise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2xx-Status-Codes"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 2xx Status Codes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-3xx-Status-Codes"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 3xx Status Codes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-4xx-Status-Codes"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 4xx Status Codes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-5xx-Status-Codes"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 5xx Status Codes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Server-Response"><span class="nav-number">3.</span> <span class="nav-text">3. Server Response</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Avoid-Plain-Text-Responses"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 Avoid Plain Text Responses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Don%E2%80%99t-Return-200-Status-for-Errors"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 Don’t Return 200 Status for Errors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Provide-Links"><span class="nav-number">4.</span> <span class="nav-text">3.3 Provide Links</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Shawn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
       </div>
     </div>
-  </div>
-</header>
 
-      <div class="outer">
-        <section id="main"><article id="post-restful-api-design" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/09/12/restful-api-design/" class="article-date">
-  <time class="dt-published" datetime="2024-09-12T01:58:39.000Z" itemprop="datePublished">2024-09-12</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Restful-API/">Restful API</a>
-  </div>
+  </aside>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      Restful API Design: Best Practices and Guidelines
-    </h1>
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
   
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://gaoshan070.github.io/2024/09/12/restful-api-design/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Shawn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shawn's Tech Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Restful API Design: Best Practices and Guidelines | Shawn's Tech Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Restful API Design: Best Practices and Guidelines
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
       
-        <p>RESTful is currently the most popular API design standard used for designing web data interfaces.</p>
+
+      <time title="Created: 2024-09-12 13:58:39 / Modified: 22:05:50" itemprop="dateCreated datePublished" datetime="2024-09-12T13:58:39+12:00">2024-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Restful-API/" itemprop="url" rel="index"><span itemprop="name">Restful API</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><hr>
+<p>RESTful is currently the most popular API design standard used for designing web data interfaces.</p>
 <p>Its core principles are easy to grasp, but the details can be tricky to get right. This article summarizes the finer points of RESTful design and explains how to design APIs that are easy to understand and use.</p>
-<h2 id="1-URL-Design"><a href="#1-URL-Design" class="headerlink" title="1. URL Design"></a>1. URL Design</h2><h3 id="1-1-Verb-Object"><a href="#1-1-Verb-Object" class="headerlink" title="1.1 Verb + Object"></a>1.1 Verb + Object</h3><p>The core idea of RESTful design is that the client’s data operation commands follow the structure “verb + object.” For example, the command GET &#x2F;articles uses GET as the verb and &#x2F;articles as the object.</p>
+<h2 id="1-URL-Design"><a href="#1-URL-Design" class="headerlink" title="1. URL Design"></a>1. URL Design</h2><hr>
+<h3 id="1-1-Verb-Object"><a href="#1-1-Verb-Object" class="headerlink" title="1.1 Verb + Object"></a>1.1 Verb + Object</h3><p>The core idea of RESTful design is that the client’s data operation commands follow the structure “verb + object.” For example, the command GET &#x2F;articles uses GET as the verb and &#x2F;articles as the object.</p>
 <p>The verbs usually correspond to the five HTTP methods, which align with CRUD operations:</p>
 <ul>
 <li>GET: Read</li>
@@ -133,7 +251,8 @@
 <p>But the query string format is clearly better:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /articles?published=true</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-Status-Codes"><a href="#2-Status-Codes" class="headerlink" title="2. Status Codes"></a>2. Status Codes</h2><h3 id="2-1-Status-Codes-Must-Be-Precise"><a href="#2-1-Status-Codes-Must-Be-Precise" class="headerlink" title="2.1 Status Codes Must Be Precise"></a>2.1 Status Codes Must Be Precise</h3><p>For every client request, the server must respond. The response includes both an HTTP status code and data.</p>
+<h2 id="2-Status-Codes"><a href="#2-Status-Codes" class="headerlink" title="2. Status Codes"></a>2. Status Codes</h2><hr>
+<h3 id="2-1-Status-Codes-Must-Be-Precise"><a href="#2-1-Status-Codes-Must-Be-Precise" class="headerlink" title="2.1 Status Codes Must Be Precise"></a>2.1 Status Codes Must Be Precise</h3><p>For every client request, the server must respond. The response includes both an HTTP status code and data.</p>
 <p>HTTP status codes are three-digit numbers, divided into five categories:</p>
 <ul>
 <li>1xx: Informational</li>
@@ -149,8 +268,9 @@
 <li><strong>POST</strong>: 201 Created</li>
 <li><strong>PUT</strong>: 200 OK</li>
 <li><strong>PATCH</strong>: 200 OK</li>
-<li><strong>DELETE</strong>: 204 No Content<br>In the example above, POST returns a 201 status code, indicating a new resource was created, and DELETE returns 204, meaning the resource no longer exists.</li>
+<li><strong>DELETE</strong>: 204 No Content</li>
 </ul>
+<p>In the example above, POST returns a 201 status code, indicating a new resource was created, and DELETE returns 204, meaning the resource no longer exists.</p>
 <p>Additionally, the 202 Accepted status code means the server has received the request but has not yet processed it, often used for asynchronous operations. Here’s an example:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 202 Accepted</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;task&quot;: &#123;</span><br><span class="line">    &quot;href&quot;: &quot;/api/company/job-management/jobs/2130040&quot;,</span><br><span class="line">    &quot;id&quot;: &quot;2130040&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -158,12 +278,13 @@
 <p>Instead, APIs may use the 303 See Other status code, which indicates a reference to another URL. It functions similarly to 302 and 307, but 303 is used for POST, PUT, and DELETE requests. Upon receiving a 303 status code, the browser won’t automatically redirect, allowing the user to decide the next step. Here’s an example:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 303 See Other</span><br><span class="line">Location: /api/orders/12345</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-4-4xx-Status-Codes"><a href="#2-4-4xx-Status-Codes" class="headerlink" title="2.4 4xx Status Codes"></a>2.4 4xx Status Codes</h3><p>4xx status codes represent client errors. Common codes include:</p>
-<p>400 Bad Request: The server cannot understand the client’s request and hasn’t processed it.<br>401 Unauthorized: The user has not provided authentication credentials, or they failed authentication.<br>403 Forbidden: The user passed authentication but doesn’t have permission to access the resource.<br>404 Not Found: The requested resource doesn’t exist or isn’t available.<br>405 Method Not Allowed: The authenticated user doesn’t have permission to use the HTTP method.<br>410 Gone: The requested resource has been permanently removed from this URL.<br>415 Unsupported Media Type: The client requested a format that’s not supported. For example, the API only returns JSON, but the client requested XML.<br>422 Unprocessable Entity: The client sent an attachment that the server can’t process, causing the request to fail.<br>429 Too Many Requests: The client has exceeded their rate limit.<br>2.5 5xx Status Codes<br>5xx status codes represent server errors. Generally, APIs don’t need to disclose detailed server information, so two codes are typically sufficient:</p>
-<p>500 Internal Server Error: The client’s request was valid, but an unexpected error occurred during processing.<br>503 Service Unavailable: The server is unable to handle the request, usually indicating maintenance.</p>
-<h2 id="3-Server-Response"><a href="#3-Server-Response" class="headerlink" title="3. Server Response"></a>3. Server Response</h2><h3 id="3-1-Avoid-Plain-Text-Responses"><a href="#3-1-Avoid-Plain-Text-Responses" class="headerlink" title="3.1 Avoid Plain Text Responses"></a>3.1 Avoid Plain Text Responses</h3><p>API responses should not be plain text. Instead, they should return structured data in a JSON object. This allows the data to be easily parsed and understood. Therefore, the server’s response header should include Content-Type: application&#x2F;json.</p>
+<h3 id="2-4-4xx-Status-Codes"><a href="#2-4-4xx-Status-Codes" class="headerlink" title="2.4 4xx Status Codes"></a>2.4 4xx Status Codes</h3><p><code>4xx</code> status codes represent client errors. Common codes include:<br><code>400 Bad Request</code>: The server cannot understand the client’s request and hasn’t processed it.<br><code>401 Unauthorized</code>: The user has not provided authentication credentials, or they failed authentication.<br><code>403 Forbidden</code>: The user passed authentication but doesn’t have permission to access the resource.<br><code>404 Not Found</code>: The requested resource doesn’t exist or isn’t available.<br><code>405 Method Not Allowed</code>: The authenticated user doesn’t have permission to use the HTTP method.<br><code>410 Gone</code>: The requested resource has been permanently removed from this URL.<br><code>415 Unsupported Media Type</code>: The client requested a format that’s not supported. For example, the API only returns JSON, but the client requested XML.<br><code>422 Unprocessable Entity</code>: The client sent an attachment that the server can’t process, causing the request to fail.<br><code>429 Too Many Requests</code>: The client has exceeded their rate limit.</p>
+<h3 id="2-5-5xx-Status-Codes"><a href="#2-5-5xx-Status-Codes" class="headerlink" title="2.5 5xx Status Codes"></a>2.5 5xx Status Codes</h3><p><code>5xx</code> status codes represent server errors. Generally, APIs don’t need to disclose detailed server information, so two codes are typically sufficient:<br><code>500 Internal Server Error</code>: The client’s request was valid, but an unexpected error occurred during processing.<br><code>503 Service Unavailable</code>: The server is unable to handle the request, usually indicating maintenance.</p>
+<h2 id="3-Server-Response"><a href="#3-Server-Response" class="headerlink" title="3. Server Response"></a>3. Server Response</h2><hr>
+<h3 id="3-1-Avoid-Plain-Text-Responses"><a href="#3-1-Avoid-Plain-Text-Responses" class="headerlink" title="3.1 Avoid Plain Text Responses"></a>3.1 Avoid Plain Text Responses</h3><p>API responses should not be plain text. Instead, they should return structured data in a JSON object. This allows the data to be easily parsed and understood. Therefore, the server’s response header should include Content-Type: application&#x2F;json.</p>
 <p>Similarly, clients should explicitly inform the server that they accept JSON responses by setting the Accept header to application&#x2F;json. Example:</p>
-<p>Copy code<br>GET &#x2F;orders&#x2F;2 HTTP&#x2F;1.1<br>Accept: application&#x2F;json<br>3.2 Don’t Return 200 Status for Errors<br>A common mistake is returning a 200 status code even when an error occurs, and placing the error message inside the response body. For example:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /orders/2 HTTP/1.1 </span><br><span class="line">Accept: application/json</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-Don’t-Return-200-Status-for-Errors"><a href="#3-2-Don’t-Return-200-Status-for-Errors" class="headerlink" title="3.2 Don’t Return 200 Status for Errors"></a>3.2 Don’t Return 200 Status for Errors</h3><p>A common mistake is returning a 200 status code even when an error occurs, and placing the error message inside the response body. For example:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;status&quot;: &quot;failure&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;error&quot;: &quot;Expected at least two items in list.&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>In the example above, only after parsing the response body can the client know that the operation failed. This approach effectively nullifies the usefulness of status codes and should be avoided. The correct approach is to return an appropriate error status code, with details in the response body:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 400 Bad Request</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;error&quot;: &quot;Invalid payload.&quot;,</span><br><span class="line">  &quot;detail&quot;: &#123;</span><br><span class="line">     &quot;surname&quot;: &quot;This field is required.&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -173,136 +294,90 @@
 <p>In the response above, following one URL will lead to more URLs. Users don’t need to memorize URL designs—they can discover them step by step starting from api.github.com.</p>
 <p>There is no standardized format for HATEOAS. In the example above, GitHub mixes links with other properties. A better practice would be to separate related links from other attributes:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;status&quot;: &quot;In progress&quot;,</span><br><span class="line">   &quot;links&quot;: &#123;[</span><br><span class="line">    &#123; &quot;rel&quot;:&quot;cancel&quot;, &quot;method&quot;: &quot;delete&quot;, &quot;href&quot;:&quot;/api/status/12345&quot; &#125; ,</span><br><span class="line">    &#123; &quot;rel&quot;:&quot;edit&quot;, &quot;method&quot;: &quot;put&quot;, &quot;href&quot;:&quot;/api/status/12345&quot; &#125;</span><br><span class="line">  ]&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
     </div>
-    <footer class="article-footer">
-      <a data-url="http://gaoshan070.github.io/2024/09/12/restful-api-design/" data-id="cm0z2hzpb0003flza3bezgpv6" data-title="Restful API Design: Best Practices and Guidelines" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/API/" rel="tag">API</a></li></ul>
 
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/API/" rel="tag"># API</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/12/hexo-tutorial/" rel="prev" title="Hexo Introduction">
+                  <i class="fa fa-angle-left"></i> Hexo Introduction
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Shawn</span>
   </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2024/09/12/hexo-tutorial/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hexo Introduction</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Restful-API/">Restful API</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Development/">Web Development</a></li></ul>
-    </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/API/" style="font-size: 10px;">API</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2024/09/12/restful-api-design/">Restful API Design: Best Practices and Guidelines</a>
-          </li>
-        
-          <li>
-            <a href="/2024/09/12/hexo-tutorial/">Hexo Introduction</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2024 Shawn<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
 
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
+  </footer>
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
 </body>
 </html>
