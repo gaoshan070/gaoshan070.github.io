@@ -221,7 +221,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-09-15 21:11:17 / Modified: 21:27:34" itemprop="dateCreated datePublished" datetime="2024-09-15T21:11:17+12:00">2024-09-15</time>
+      <time title="Created: 2024-09-15 21:11:17 / Modified: 21:30:26" itemprop="dateCreated datePublished" datetime="2024-09-15T21:11:17+12:00">2024-09-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -273,75 +273,14 @@
 <td>Person lily &#x3D; new Person()</td>
 </tr>
 </tbody></table>
-<p>Similarly, “book” is also an abstract concept, so it is a class, while specific books like Core Java, Thinking in Java, and Java Notes are instances:</p>
-<table>
-<thead>
-<tr>
-<th>Real World</th>
-<th>Computer Model</th>
-<th>Java Code</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Book</td>
-<td>Class</td>
-<td>class Book { }</td>
-</tr>
-<tr>
-<td>Core Java</td>
-<td>Instance &#x2F; book1</td>
-<td>Book book1 &#x3D; new Book()</td>
-</tr>
-<tr>
-<td>Thinking in Java</td>
-<td>Instance &#x2F; book2</td>
-<td>Book book2 &#x3D; new Book()</td>
-</tr>
-<tr>
-<td>Java Notes</td>
-<td>Instance &#x2F; book3</td>
-<td>Book book3 &#x3D; new Book()</td>
-</tr>
-</tbody></table>
-<p>So, once you understand the concepts of class and instance, you’ve essentially grasped the core of object-oriented programming.</p>
-<p>A class is a blueprint for creating instances. Therefore, a class itself is a data type, while an instance is an object created from a class. You can create multiple instances, each having the same type but possibly with different properties.</p>
-<h3 id="Defining-a-Class"><a href="#Defining-a-Class" class="headerlink" title="Defining a Class"></a>Defining a Class</h3><p>In Java, creating a class, such as naming it Person, is defining a class:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    public String name;</span><br><span class="line">    public int age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>A class can contain multiple fields, which describe the characteristics of the class. In the Person class above, two fields are defined: one is a String type field named name, and the other is an int type field named age. The class collects data into an object, achieving data encapsulation.</p>
-<p>public is used to modify fields, meaning these fields can be accessed externally.</p>
-<p>Here’s another example of defining the Book class:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Book &#123;</span><br><span class="line">    public String name;</span><br><span class="line">    public String author;</span><br><span class="line">    public String isbn;</span><br><span class="line">    public double price;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Please identify the fields in the Book class.</p>
-<h3 id="Creating-Instances"><a href="#Creating-Instances" class="headerlink" title="Creating Instances"></a>Creating Instances</h3><p>Defining a class only creates the blueprint for objects, but to create actual object instances based on the blueprint, you must use the new operator.</p>
-<p>The new operator creates an instance, and then you need to define a reference type variable to point to that instance:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person bob = new Person();</span><br></pre></td></tr></table></figure>
-
-<p>The code above creates an instance of the Person type and points to it using the variable bob.</p>
-<p>It’s important to distinguish between Person Bob, which defines the bob variable of type Person, and new Person(), which creates a Person instance.</p>
-<p>Once you have a variable pointing to the instance, you can operate on the instance through the variable. You can access instance variables using variable.field, for example:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bob.name = &quot;Bob&quot;;  // Assign a value to the name field</span><br><span class="line">bob.age = 12;            // Assign a value to the age field</span><br><span class="line">System.out.println(bob.name);  // Access the name field</span><br></pre></td></tr></table></figure>
-
-<p>You can create another instance as below:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person tom = new Person();</span><br><span class="line">tom.name = &quot;Tom&quot;;</span><br><span class="line">tom.age = 15;</span><br></pre></td></tr></table></figure>
-
-<p>The two variables each point to different instances. Their structure in memory looks like this:</p>
-<pre><code>        ┌──────────────────┐
-</code></pre>
-<p>bob  ──────▶│Person instance   │<br>            ├──────────────────┤<br>            │name &#x3D; “Bob”      │<br>            │age &#x3D; 12          │<br>            └──────────────────┘<br>            ┌──────────────────┐<br>tom  ──────▶│Person instance   │<br>            ├──────────────────┤<br>            │name &#x3D; “Tom”      │<br>            │age &#x3D; 15          │<br>            └──────────────────┘<br>Both instances have the name and age fields defined by the class, and each holds its own independent data without interfering with the other.</p>
-<p>Note</p>
-<p>A single Java source file can contain multiple class definitions, but it can only have one public class, and the public class name must match the file name. If you need to define multiple public classes, they must be split into separate Java source files.</p>
-<h3 id="Exercise"><a href="#Exercise" class="headerlink" title="Exercise"></a>Exercise</h3><p>Define a City class with the following fields:</p>
-<p>name: the name of the city, of type String<br>latitude: the latitude, of type double<br>longitude: the longitude, of type double<br>Instantiate a few City objects, assign values to them, and print them out.</p>
-<p>Example:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ???</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class City &#123;</span><br><span class="line">    // Fields go here</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><p>In OOP, a class is the “template” and an instance is the “object” created from that template.</p>
-<p>Defining a class is defining a data type, and instances are objects of that data type.</p>
-<p>Each instance of a class has its own set of fields, independent of other instances.</p>
-<p>You create new instances with the <em><strong>new</strong></em> operator, and use variables to reference them.</p>
-<p>You access instance fields using the syntax <em><strong>variable.field</strong></em>.</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/09/15/Class-and-Instance/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
